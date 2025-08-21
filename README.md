@@ -1,2 +1,2 @@
 # ihsan-kohhati
-create a new repository
+create a new repository i hate my life
