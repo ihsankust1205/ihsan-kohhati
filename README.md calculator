@@ -1,0 +1,70 @@
+#include <iostream>
+#include <limits>
+using namespace std;
+
+class Calculator {
+public:
+    double add(double a, double b)        { return a + b; }
+    double sub(double a, double b)        { return a - b; }
+    double mul(double a, double b)        { return a * b; }
+    bool div(double a, double b, double& out) {
+        if (b == 0.0) return false;
+        out = a / b;
+        return true;
+    }
+};
+
+void clearInput() {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+int main() {
+    Calculator calc;
+    while (true) {
+        cout << "\n=== C++ Calculator ===\n"
+             << "1) Add (+)\n"
+             << "2) Subtract (-)\n"
+             << "3) Multiply (*)\n"
+             << "4) Divide (/)\n"
+             << "5) Exit\n"
+             << "Choose (1-5): ";
+
+        int choice;
+        if (!(cin >> choice)) { clearInput(); continue; }
+
+        if (choice == 5) {
+            cout << "Goodbye!\n";
+            break;
+        }
+
+        cout << "Enter first number: ";
+        double a, b;
+        if (!(cin >> a)) { clearInput(); cout << "Invalid input.\n"; continue; }
+
+        cout << "Enter second number: ";
+        if (!(cin >> b)) { clearInput(); cout << "Invalid input.\n"; continue; }
+
+        switch (choice) {
+            case 1:
+                cout << "Result: " << calc.add(a, b) << "\n";
+                break;
+            case 2:
+                cout << "Result: " << calc.sub(a, b) << "\n";
+                break;
+            case 3:
+                cout << "Result: " << calc.mul(a, b) << "\n";
+                break;
+            case 4: {
+                double ans;
+                if (calc.div(a, b, ans)) cout << "Result: " << ans << "\n";
+                else cout << "Error: Division by zero!\n";
+                break;
+            }
+            default:
+                cout << "Please choose between 1-5.\n";
+        }
+    }
+    return 0;
+}
+
